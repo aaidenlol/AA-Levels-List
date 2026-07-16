@@ -116,7 +116,7 @@ export default {
                             </li>
                         </ol>
                     </template>
-                    <h3>WE DONT TAKE SUBMISSIONS!</h3>
+                    <h3>Submit records through the AAPL Discord Server!</h3>
                 </div>
             </div>
         </main>
