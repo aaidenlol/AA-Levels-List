@@ -8,6 +8,6 @@
     "verification": "https://youtu.be/F1XjdnlgcTY",
     "showcase": "https://youtu.be/F1XjdnlgcTY",    
     "percentToQualify": "100",
-    "records": [],
+    "records": [ { "user": "PlayerName", "link": "https://www.youtube.com/watch?v=i3NXPk4ROao", "percent": 100 } ], 
     "tags": []
 }
