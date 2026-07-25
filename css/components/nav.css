@@ -53,3 +53,8 @@
 .nav .nav__actions .nav__cta:hover:not(:active) {
     transform: translateY(-2px);
 }
+.nav__logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
