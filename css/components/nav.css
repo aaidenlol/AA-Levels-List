@@ -41,11 +41,12 @@
     height: 1.5rem;
 }
 .nav .nav__actions .nav__cta {
-    margin-left: 1rem;
-    padding: 1rem;
-    background-color: var(--color-on-primary);
-    color: var(--color-primary);
-    border-radius: 0.5rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+  border-radius: 0.5rem;
+}
     box-shadow: 0 1px 0.5rem 0 rgba(0, 0, 102, 0.5);
     transition: transform 100ms ease;
 }
