@@ -5,8 +5,8 @@
   --color-on-background-hover: black;
 
   /* LIGHT MODE */
-  --color-primary: #ff69b4;
-  --color-secondary: #9b59e6;
+  --color-primary: #FA7FFF;
+  --color-secondary: #6F49A4;
 
   --color-on-primary: white;
   --color-on-secondary: white;
@@ -25,8 +25,8 @@ header.dark {
   --color-on-background-hover: white;
 
   /* DARK MODE */
-  --color-primary: #9b59e6;
-  --color-secondary: #ff69b4;
+  --color-primary: #6F49A4;
+  --color-secondary: #FA7FFF;
 
   --color-on-primary: white;
   --color-on-secondary: white;
