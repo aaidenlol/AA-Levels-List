@@ -8,6 +8,7 @@
     "verification": "https://youtu.be/EUGdpt5okhg",
     "showcase": "https://youtu.be/EUGdpt5okhg",    
     "percentToQualify": "100",
-    "records": [],
+    "records": [ { "user": "Scraptrap", "link": "https://youtu.be/ZY_mRZ_8wHE", "percent": 100 } ], 
     "tags": []
+
 }
