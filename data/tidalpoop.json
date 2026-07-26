@@ -8,6 +8,6 @@
     "verification": "https://youtu.be/HTajNxydY2s",
     "showcase": "https://youtu.be/HTajNxydY2s",    
     "percentToQualify": "100",
-    "records": [],
+    "records": [ { "user": "Erovisa", "link": "https://www.youtube.com/watch?v=guaFEWH6kVM", "percent": 100 } ], 
     "tags": []
 }
