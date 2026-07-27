@@ -43,7 +43,7 @@ export default {
                     <p v-if="level.description" class="level-description">
 {{ level.description }}
 </p>
-                    <div style="display:flex">
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
                         <div v-for="tag in level.tags" class="tag">{{tag}}</div>
                     </div>
                     <div v-if="level.showcase" class="tabs">
