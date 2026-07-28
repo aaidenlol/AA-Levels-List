@@ -8,6 +8,6 @@
     "verification": "https://youtu.be/YrIg49Ezrfk",
     "showcase": "https://youtu.be/YrIg49Ezrfk",    
     "percentToQualify": "100",
-    "records": [], 
+    "records": [ { "user": "Erovisa", "link": "https://youtu.be/HfAWGpHG748", "percent": 100 } ], 
     "tags": ["Timings", "Cube", "Chokepoints"]
 }
