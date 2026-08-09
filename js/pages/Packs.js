@@ -10,41 +10,41 @@ export default {
             {
                 name: 'The MTF Trilogy',
                 levels: [
-                    'Meatball Chal Colon3',
-                    'Thinking In My Space',
-                    'Filler Ahh Level',
+                    'mccthree',
+                    'tims',
+                    'fillerahhlevel',
                 ],
             },
             {
                 name: 'The OG Spam Trilogy',
                 levels: [
-                    'Idek What Ts Is',
-                    'Wave Spam Dog',
-                    'Mikus Spam Chal',
+                    'idekwhattsis',
+                    'wavespamdog',
+                    'mikuspamchal',
                 ],
             },
             {
                 name: 'The Fallen Rulers',
                 levels: [
-                    'STS Buffed',
-                    'Poopy Cologne',
-                    'UwU Challenge',
+                    'stsbuffed',
+                    'poopycologne',
+                    'uwuchal',
                 ],
             },
             {
                 name: 'Spouses, Husbands And Wives',
                 levels: [
-                    'AAcropolis',
-                    'Lock In Twin',
-                    'Mikus Spam Chal',
-                    'Wave Spam Dog',
+                    'aacropolis',
+                    'lockintwin',
+                    'mikuspamchal',
+                    'wavespamdog',
                 ],
             },
             {
                 name: 'Silly Ahh Levels',
                 levels: [
-                    'Silly Robo Chal',
-                    'UwU Challenge',
+                    'sillyrobochal',
+                    'uwuchal',
                 ],
             },
         ],
@@ -61,16 +61,25 @@ export default {
     },
 
     methods: {
-        getLevel(name) {
+        getLevel(path) {
             return this.list.find(
                 ([err, rank, level]) =>
-                    level &&
-                    level.name.toLowerCase() === name.toLowerCase()
+                    level && level.path === path
             );
         },
 
-        getRank(name) {
-            const result = this.getLevel(name);
+        getName(path) {
+            const result = this.getLevel(path);
+
+            if (!result) {
+                return path;
+            }
+
+            return result[2].name;
+        },
+
+        getRank(path) {
+            const result = this.getLevel(path);
 
             if (!result) {
                 return null;
@@ -79,8 +88,8 @@ export default {
             return result[1];
         },
 
-        getPoints(name) {
-            const result = this.getLevel(name);
+        getPoints(path) {
+            const result = this.getLevel(path);
 
             if (!result || result[1] === null) {
                 return null;
@@ -100,6 +109,21 @@ export default {
                 level.percentToQualify,
                 rankedLevels
             );
+        },
+
+        openLevel(path) {
+            const result = this.getLevel(path);
+
+            if (!result) {
+                return;
+            }
+
+            this.$router.push({
+                path: '/',
+                query: {
+                    level: path,
+                },
+            });
         },
     },
 
@@ -206,8 +230,9 @@ export default {
                     <!-- LEVEL ROWS -->
 
                     <div
-                        v-for="level in currentPack.levels"
-                        :key="level"
+                        v-for="levelPath in currentPack.levels"
+                        :key="levelPath"
+                        @click="openLevel(levelPath)"
                         style="
                             background: var(--color-background-hover);
                             border-radius: 10px;
@@ -217,6 +242,7 @@ export default {
                             align-items: center;
                             gap: 20px;
                             min-height: 72px;
+                            cursor: pointer;
                         "
                     >
 
@@ -225,8 +251,8 @@ export default {
                             font-weight: bold;
                             min-width: 65px;
                         ">
-                            {{ getRank(level) !== null
-                                ? '#' + getRank(level)
+                            {{ getRank(levelPath) !== null
+                                ? '#' + getRank(levelPath)
                                 : '—'
                             }}
                         </div>
@@ -237,17 +263,17 @@ export default {
                                 margin: 0 0 6px 0;
                                 line-height: 1.1;
                             ">
-                                {{ level }}
+                                {{ getName(levelPath) }}
                             </h2>
 
                             <p
-                                v-if="getPoints(level) !== null"
+                                v-if="getPoints(levelPath) !== null"
                                 style="
                                     margin: 0;
                                     opacity: 0.8;
                                 "
                             >
-                                +{{ getPoints(level) }} points
+                                +{{ getPoints(levelPath) }} points
                             </p>
 
                         </div>
