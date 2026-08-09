@@ -16,108 +16,359 @@ const roleIconMap = {
 
 export default {
     components: { Spinner, LevelAuthors },
+
     template: `
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
+
         <main v-else class="page-list">
+
             <div class="list-container">
+
                 <table class="list" v-if="list">
+
                     <tr v-for="([err, rank, level], i) in list">
+
                         <td class="rank">
-                            <p v-if="rank === null" class="type-label-lg">&mdash;</p>
-                            <p v-else class="type-label-lg" :style="{ color: rank > 200 ? 'darkgrey' : undefined }">#{{ rank }}</p>
+
+                            <p
+                                v-if="rank === null"
+                                class="type-label-lg"
+                            >
+                                &mdash;
+                            </p>
+
+                            <p
+                                v-else
+                                class="type-label-lg"
+                                :style="{
+                                    color: rank > 200
+                                        ? 'darkgrey'
+                                        : undefined
+                                }"
+                            >
+                                #{{ rank }}
+                            </p>
+
                         </td>
-                        <td class="level" :class="{ 'active': selected == i, 'error': err !== null }">
+
+                        <td
+                            class="level"
+                            :class="{
+                                'active': selected == i,
+                                'error': err !== null
+                            }"
+                        >
+
                             <button @click="selected = i">
-                                <span class="type-label-lg">{{ level?.name || \`Error (\${err}.json)\` }}</span>
+
+                                <span class="type-label-lg">
+                                    {{ level?.name || \`Error (\${err}.json)\` }}
+                                </span>
+
                             </button>
+
                         </td>
+
                     </tr>
+
                 </table>
+
             </div>
+
+
             <div class="level-container">
+
                 <div class="level" v-if="level">
+
                     <h1>{{ level.name }}</h1>
-                    <LevelAuthors :author="level.author" :creators="level.creators" :verifier="level.verifier"></LevelAuthors>
-                    <p v-if="level.description" class="level-description">
-{{ level.description }}
-</p>
-                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                        <div v-for="tag in level.tags" class="tag">{{tag}}</div>
+
+                    <LevelAuthors
+                        :author="level.author"
+                        :creators="level.creators"
+                        :verifier="level.verifier"
+                    ></LevelAuthors>
+
+                    <p
+                        v-if="level.description"
+                        class="level-description"
+                    >
+                        {{ level.description }}
+                    </p>
+
+                    <div style="
+                        display:flex;
+                        gap:0.5rem;
+                        flex-wrap:wrap;
+                    ">
+                        <div
+                            v-for="tag in level.tags"
+                            class="tag"
+                        >
+                            {{ tag }}
+                        </div>
                     </div>
-                    <div v-if="level.showcase" class="tabs">
-                        <button class="tab type-label-lg" :class="{selected: !toggledShowcase}" @click="toggledShowcase = false">
-                            <span class="type-label-lg">Verification</span>
+
+
+                    <div
+                        v-if="level.showcase"
+                        class="tabs"
+                    >
+
+                        <button
+                            class="tab type-label-lg"
+                            :class="{
+                                selected: !toggledShowcase
+                            }"
+                            @click="toggledShowcase = false"
+                        >
+                            <span class="type-label-lg">
+                                Verification
+                            </span>
                         </button>
-                        <button class="tab" :class="{selected: toggledShowcase}" @click="toggledShowcase = true">
-                            <span class="type-label-lg">Showcase</span>
+
+                        <button
+                            class="tab"
+                            :class="{
+                                selected: toggledShowcase
+                            }"
+                            @click="toggledShowcase = true"
+                        >
+                            <span class="type-label-lg">
+                                Showcase
+                            </span>
                         </button>
+
                     </div>
-                    <iframe class="video" id="videoframe" :src="video" frameborder="0"></iframe>
+
+
+                    <iframe
+                        class="video"
+                        id="videoframe"
+                        :src="video"
+                        frameborder="0"
+                    ></iframe>
+
+
                     <ul class="stats">
+
                         <li>
-                            <div class="type-title-sm">Points when completed</div>
-                            <p>{{ score(level.rank, 100, level.percentToQualify, list.filter((x)=>x[2]["rank"]!==null).length) }}</p>
+                            <div class="type-title-sm">
+                                Points when completed
+                            </div>
+
+                            <p>
+                                {{
+                                    score(
+                                        level.rank,
+                                        100,
+                                        level.percentToQualify,
+                                        list.filter(
+                                            (x) => x[2]["rank"] !== null
+                                        ).length
+                                    )
+                                }}
+                            </p>
                         </li>
+
                         <li>
-                            <div class="type-title-sm">ID</div>
+                            <div class="type-title-sm">
+                                ID
+                            </div>
+
                             <p>{{ level.id }}</p>
                         </li>
+
                         <li>
-                            <div class="type-title-sm">Password</div>
-                            <p>{{ level.password || 'Free to copy' }}</p>
+                            <div class="type-title-sm">
+                                Password
+                            </div>
+
+                            <p>
+                                {{ level.password || 'Free to copy' }}
+                            </p>
                         </li>
+
                     </ul>
-                    <ul stats="stats" v-if="level.song">
+
+
+                    <ul
+                        stats="stats"
+                        v-if="level.song"
+                    >
+
                         <li>
-                            <div class="type-title-sm">Song</div><br>
-                            <p><a :href="(level.song===undefined)?'#':level.song" :style="{'text-decoration':(level.song===undefined)?'none':'underline'}">Link to song</a></p>
+
+                            <div class="type-title-sm">
+                                Song
+                            </div>
+
+                            <br>
+
+                            <p>
+                                <a
+                                    :href="(level.song===undefined)
+                                        ? '#'
+                                        : level.song"
+                                    :style="{
+                                        'text-decoration':
+                                            (level.song===undefined)
+                                                ? 'none'
+                                                : 'underline'
+                                    }"
+                                >
+                                    Link to song
+                                </a>
+                            </p>
+
                         </li>
+
                     </ul>
+
+
                     <h2>Records</h2>
-                    <p v-if="level.rank === null">This level does not accept records.</p>
-                    <p v-else-if="level.rank <= 100"><strong>{{ level.percentToQualify }}%</strong> or better to qualify</p>
-                    <p v-else-if="level.rank <= 200"><strong>100%</strong> or better to qualify</p>
-                    <p v-else>This level has fallen to legacy, but still accepts completion records.</p>
+
+                    <p v-if="level.rank === null">
+                        This level does not accept records.
+                    </p>
+
+                    <p v-else-if="level.rank <= 100">
+                        <strong>
+                            {{ level.percentToQualify }}%
+                        </strong>
+                        or better to qualify
+                    </p>
+
+                    <p v-else-if="level.rank <= 200">
+                        <strong>100%</strong>
+                        or better to qualify
+                    </p>
+
+                    <p v-else>
+                        This level has fallen to legacy,
+                        but still accepts completion records.
+                    </p>
+
+
                     <table class="records">
-                        <tr v-for="record in level.records" class="record">
+
+                        <tr
+                            v-for="record in level.records"
+                            class="record"
+                        >
+
                             <td class="percent">
-                                <p>{{ record.percent }}%</p>
+                                <p>
+                                    {{ record.percent }}%
+                                </p>
                             </td>
+
                             <td class="user">
-                                <a :href="record.link" target="_blank" class="type-label-lg">{{ record.user }}</a>
+
+                                <a
+                                    :href="record.link"
+                                    target="_blank"
+                                    class="type-label-lg"
+                                >
+                                    {{ record.user }}
+                                </a>
+
                             </td>
+
                             <td class="mobile">
-                                <img v-if="record.mobile" :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`" alt="Mobile">
+
+                                <img
+                                    v-if="record.mobile"
+                                    :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`"
+                                    alt="Mobile"
+                                >
+
                             </td>
+
                         </tr>
+
                     </table>
+
                 </div>
-                <div v-else class="level" style="height: 100%; justify-content: center; align-items: center;">
+
+
+                <div
+                    v-else
+                    class="level"
+                    style="
+                        height: 100%;
+                        justify-content: center;
+                        align-items: center;
+                    "
+                >
                     <p>(ノಠ益ಠ)ノ彡┻━┻</p>
                 </div>
+
             </div>
+
+
             <div class="meta-container">
+
                 <div class="meta">
-                    <div class="errors" v-show="errors.length > 0">
-                        <p class="error" v-for="error of errors">{{ error }}</p>
+
+                    <div
+                        class="errors"
+                        v-show="errors.length > 0"
+                    >
+                        <p
+                            class="error"
+                            v-for="error of errors"
+                        >
+                            {{ error }}
+                        </p>
                     </div>
+
+
                     <template v-if="editors">
+
                         <h3>List Editors</h3>
+
                         <ol class="editors">
+
                             <li v-for="editor in editors">
-                                <img :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`" :alt="editor.role">
-                                <a v-if="editor.link" class="type-label-lg link" target="_blank" :href="editor.link">{{ editor.name }}</a>
-                                <p v-else>{{ editor.name }}</p>
+
+                                <img
+                                    :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`"
+                                    :alt="editor.role"
+                                >
+
+                                <a
+                                    v-if="editor.link"
+                                    class="type-label-lg link"
+                                    target="_blank"
+                                    :href="editor.link"
+                                >
+                                    {{ editor.name }}
+                                </a>
+
+                                <p v-else>
+                                    {{ editor.name }}
+                                </p>
+
                             </li>
+
                         </ol>
+
                     </template>
-                    <h3>Submit records through the AAPL Discord Server!</h3>
+
+
+                    <h3>
+                        Submit records through the AAPL Discord Server!
+                    </h3>
+
                 </div>
+
             </div>
+
         </main>
     `,
+
     data: () => ({
         list: [],
         editors: [],
@@ -129,10 +380,16 @@ export default {
         store,
         toggledShowcase: false,
     }),
+
     computed: {
         level() {
-            return this.list && this.list[this.selected] && this.list[this.selected][2];
+            return (
+                this.list &&
+                this.list[this.selected] &&
+                this.list[this.selected][2]
+            );
         },
+
         video() {
             if (!this.level.showcase) {
                 return embed(this.level.verification);
@@ -145,34 +402,65 @@ export default {
             );
         },
     },
+
     async mounted() {
-    // Hide loading spinner
-    this.list = await fetchList();
-    this.editors = await fetchEditors();
 
-    // Error handling
-    if (!this.list) {
-        this.errors = [
-            'Failed to load list. Retry in a few minutes or notify list staff.',
-        ];
-    } else {
-        this.errors.push(
-            ...this.list
-                .filter(([err, _, __]) => err)
-                .map(([err, _, __]) => {
-                    return `Failed to load level. (${err}.json)`;
-                }),
-        );
+        this.list = await fetchList();
+        this.editors = await fetchEditors();
 
-        if (!this.editors) {
-            this.errors.push('Failed to load list editors.');
+
+        // Error handling
+
+        if (!this.list) {
+
+            this.errors = [
+                'Failed to load list. Retry in a few minutes or notify list staff.',
+            ];
+
+        } else {
+
+            this.errors.push(
+                ...this.list
+                    .filter(([err, _, __]) => err)
+                    .map(([err, _, __]) => {
+                        return `Failed to load level. (${err}.json)`;
+                    }),
+            );
+
+            if (!this.editors) {
+                this.errors.push(
+                    'Failed to load list editors.'
+                );
+            }
+
+
+            // Open a specific level when arriving from Packs
+
+            const requestedLevel =
+                this.$route.query.level;
+
+            if (requestedLevel) {
+
+                const levelIndex =
+                    this.list.findIndex(
+                        ([err, rank, level]) =>
+                            level &&
+                            level.path === requestedLevel
+                    );
+
+                if (levelIndex !== -1) {
+                    this.selected = levelIndex;
+                }
+
+            }
+
         }
-    }
 
-    this.loading = false;
-},
-methods: {
-    embed,
-    score,
-},
+        this.loading = false;
+    },
+
+    methods: {
+        embed,
+        score,
+    },
 };
