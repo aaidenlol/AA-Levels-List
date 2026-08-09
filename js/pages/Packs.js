@@ -1,6 +1,10 @@
+import { fetchList } from '../content.js';
+import { score } from '../score.js';
+
 export default {
     data: () => ({
         selectedPack: null,
+        list: [],
 
         packs: [
             {
@@ -14,9 +18,9 @@ export default {
             {
                 name: 'The OG Spam Trilogy',
                 levels: [
-                    'IDEK What Ts Is',
+                    'Idek What Ts Is',
                     'Wave Spam Dog',
-                    "Miku's Spam Chal",
+                    'Mikus Spam Chal',
                 ],
             },
             {
@@ -32,7 +36,7 @@ export default {
                 levels: [
                     'AAcropolis',
                     'Lock In Twin',
-                    "Miku's Spam Chal",
+                    'Mikus Spam Chal',
                     'Wave Spam Dog',
                 ],
             },
@@ -52,13 +56,68 @@ export default {
         },
     },
 
+    async mounted() {
+        this.list = (await fetchList()) || [];
+    },
+
+    methods: {
+        getLevel(name) {
+            return this.list.find(
+                ([err, rank, level]) =>
+                    level &&
+                    level.name.toLowerCase() === name.toLowerCase()
+            );
+        },
+
+        getRank(name) {
+            const result = this.getLevel(name);
+
+            if (!result) {
+                return null;
+            }
+
+            return result[1];
+        },
+
+        getPoints(name) {
+            const result = this.getLevel(name);
+
+            if (!result || result[1] === null) {
+                return null;
+            }
+
+            const rank = result[1];
+            const level = result[2];
+
+            const rankedLevels = this.list.filter(
+                ([err, rank, level]) =>
+                    level && rank !== null
+            ).length;
+
+            return score(
+                rank,
+                100,
+                level.percentToQualify,
+                rankedLevels
+            );
+        },
+    },
+
     template: `
         <main style="display: block; overflow-y: auto;">
-            <div style="max-width: 900px; margin: 0 auto; padding: 32px;">
+            <div style="
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 32px;
+            ">
+
+                <!-- PACK SELECTION -->
 
                 <template v-if="selectedPack === null">
 
-                    <h1 style="margin-bottom: 24px;">Packs</h1>
+                    <h1 style="margin-bottom: 24px;">
+                        Packs
+                    </h1>
 
                     <div style="
                         display: grid;
@@ -67,41 +126,45 @@ export default {
                     ">
 
                         <div
-    v-for="(pack, index) in packs"
-    :key="pack.name"
-    @click="selectedPack = index"
-    style="
-        background: var(--color-background-hover);
-        border: 2px solid var(--color-primary);
-        border-radius: 12px;
-        padding: 20px;
-        cursor: pointer;
-        min-height: 110px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    "
->
-    <h2 style="
-        margin: 0 0 16px 0;
-        line-height: 1.15;
-    ">
-        {{ pack.name }}
-    </h2>
+                            v-for="(pack, index) in packs"
+                            :key="pack.name"
+                            @click="selectedPack = index"
+                            style="
+                                background: var(--color-background-hover);
+                                border: 2px solid var(--color-primary);
+                                border-radius: 12px;
+                                padding: 20px;
+                                cursor: pointer;
+                                min-height: 110px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                            "
+                        >
 
-    <p style="
-        margin: 0;
-        line-height: 1.4;
-        opacity: 0.8;
-    ">
-        {{ pack.levels.length }} levels
-    </p>
-</div>
+                            <h2 style="
+                                margin: 0 0 16px 0;
+                                line-height: 1.15;
+                            ">
+                                {{ pack.name }}
+                            </h2>
+
+                            <p style="
+                                margin: 0;
+                                line-height: 1.4;
+                                opacity: 0.8;
+                            ">
+                                {{ pack.levels.length }} levels
+                            </p>
+
+                        </div>
 
                     </div>
 
                 </template>
 
+
+                <!-- INSIDE A PACK -->
 
                 <template v-else>
 
@@ -120,19 +183,75 @@ export default {
                         ← Back to Packs
                     </button>
 
-                    <h1>{{ currentPack.name }}</h1>
+                    <h1 style="
+                        margin: 0 0 8px 0;
+                    ">
+                        {{ currentPack.name }}
+                    </h1>
+
+                    <p style="
+                        margin: 0 0 28px 0;
+                        opacity: 0.8;
+                    ">
+                        {{ currentPack.levels.length }} levels
+                    </p>
+
+                    <h2 style="
+                        margin: 0 0 12px 0;
+                    ">
+                        Levels
+                    </h2>
+
+
+                    <!-- LEVEL ROWS -->
 
                     <div
                         v-for="level in currentPack.levels"
                         :key="level"
                         style="
                             background: var(--color-background-hover);
-                            border-radius: 8px;
-                            padding: 16px;
-                            margin-top: 12px;
+                            border-radius: 10px;
+                            padding: 18px;
+                            margin-bottom: 10px;
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            min-height: 72px;
                         "
                     >
-                        <h2>{{ level }}</h2>
+
+                        <div style="
+                            font-size: 24px;
+                            font-weight: bold;
+                            min-width: 65px;
+                        ">
+                            {{ getRank(level) !== null
+                                ? '#' + getRank(level)
+                                : '—'
+                            }}
+                        </div>
+
+                        <div>
+
+                            <h2 style="
+                                margin: 0 0 6px 0;
+                                line-height: 1.1;
+                            ">
+                                {{ level }}
+                            </h2>
+
+                            <p
+                                v-if="getPoints(level) !== null"
+                                style="
+                                    margin: 0;
+                                    opacity: 0.8;
+                                "
+                            >
+                                +{{ getPoints(level) }} points
+                            </p>
+
+                        </div>
+
                     </div>
 
                 </template>
