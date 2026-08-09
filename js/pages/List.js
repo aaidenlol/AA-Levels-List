@@ -146,44 +146,33 @@ export default {
         },
     },
     async mounted() {
-        // Hide loading spinner
-        this.list = await fetchList();
-        this.editors = await fetchEditors();
-        // Error handling
-        if (!this.list) {
-            this.errors = [
-                'Failed to load list. Retry in a few minutes or notify list staff.',
-            ];
-        } else {
-            this.errors.push(
-                ...this.list
-                    .filter(([err, _, __]) => err)
-                    .map(([err, _, __]) => {
-                        return `Failed to load level. (${err}.json)`;
-                    }),
-            );
-            if (!this.editors) {
-    this.errors.push('Failed to load list editors.');
-}
+    // Hide loading spinner
+    this.list = await fetchList();
+    this.editors = await fetchEditors();
 
-const requestedLevel = this.$route.query.level;
+    // Error handling
+    if (!this.list) {
+        this.errors = [
+            'Failed to load list. Retry in a few minutes or notify list staff.',
+        ];
+    } else {
+        this.errors.push(
+            ...this.list
+                .filter(([err, _, __]) => err)
+                .map(([err, _, __]) => {
+                    return `Failed to load level. (${err}.json)`;
+                }),
+        );
 
-if (requestedLevel) {
-    const levelIndex = this.list.findIndex(
-        ([err, rank, level]) =>
-            level &&
-            level.name.toLowerCase() === requestedLevel.toLowerCase()
-    );
-
-    if (levelIndex !== -1) {
-        this.selected = levelIndex;
+        if (!this.editors) {
+            this.errors.push('Failed to load list editors.');
+        }
     }
-}
 
-this.loading = false;
-    },
-    methods: {
-        embed,
-        score,
-    },
+    this.loading = false;
+},
+methods: {
+    embed,
+    score,
+},
 };
