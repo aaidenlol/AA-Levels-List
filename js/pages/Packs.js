@@ -219,7 +219,7 @@ export default {
                     </p>
 
                     <h2 style="
-                        margin: 0 0 12px 0;
+                        margin: 0 0 16px 0;
                     ">
                         Levels
                     </h2>
@@ -232,13 +232,13 @@ export default {
                         style="
                             background: var(--color-background-hover);
                             border-radius: 10px;
-                            padding: 18px 22px;
-                            margin-bottom: 12px;
+                            padding: 22px 24px;
+                            margin-bottom: 16px;
                             display: grid;
                             grid-template-columns: 72px minmax(0, 1fr);
                             align-items: center;
-                            column-gap: 22px;
-                            min-height: 82px;
+                            column-gap: 24px;
+                            min-height: 94px;
                             cursor: pointer;
                         "
                     >
@@ -246,7 +246,7 @@ export default {
                         <div style="
                             font-size: 24px;
                             font-weight: bold;
-                            line-height: 1;
+                            line-height: 1.2;
                         ">
                             {{ getRank(levelPath) !== null
                                 ? '#' + getRank(levelPath)
@@ -258,13 +258,13 @@ export default {
                         <div style="
                             display: flex;
                             flex-direction: column;
-                            gap: 8px;
+                            gap: 12px;
                             min-width: 0;
                         ">
 
                             <h2 style="
                                 margin: 0;
-                                line-height: 1.15;
+                                line-height: 1.2;
                             ">
                                 {{ getName(levelPath) }}
                             </h2>
@@ -273,7 +273,7 @@ export default {
                                 v-if="getPoints(levelPath) !== null"
                                 style="
                                     margin: 0;
-                                    line-height: 1.2;
+                                    line-height: 1.3;
                                     opacity: 0.8;
                                 "
                             >
