@@ -34,10 +34,10 @@ export default {
             {
                 name: 'Spouses, Husbands And Wives',
                 levels: [
-                    'aacropolis',
-                    'lockintwin',
-                    'mikuspamchal',
                     'wavespamdog',
+                    'mikuspamchal',
+                    'lockintwin',
+                    'aacropolis',
                 ],
             },
             {
