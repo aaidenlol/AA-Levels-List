@@ -67,20 +67,36 @@ export default {
                     ">
 
                         <div
-                            v-for="(pack, index) in packs"
-                            :key="pack.name"
-                            @click="selectedPack = index"
-                            style="
-                                background: var(--color-background-hover);
-                                border: 2px solid var(--color-primary);
-                                border-radius: 12px;
-                                padding: 20px;
-                                cursor: pointer;
-                            "
-                        >
-                            <h2>{{ pack.name }}</h2>
-                            <p>{{ pack.levels.length }} levels</p>
-                        </div>
+    v-for="(pack, index) in packs"
+    :key="pack.name"
+    @click="selectedPack = index"
+    style="
+        background: var(--color-background-hover);
+        border: 2px solid var(--color-primary);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        min-height: 110px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    "
+>
+    <h2 style="
+        margin: 0 0 16px 0;
+        line-height: 1.15;
+    ">
+        {{ pack.name }}
+    </h2>
+
+    <p style="
+        margin: 0;
+        line-height: 1.4;
+        opacity: 0.8;
+    ">
+        {{ pack.levels.length }} levels
+    </p>
+</div>
 
                     </div>
 
