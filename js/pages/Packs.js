@@ -150,40 +150,61 @@ export default {
                     ">
 
                         <div
-                            v-for="(pack, index) in packs"
-                            :key="pack.name"
-                            @click="selectedPack = index"
-                            style="
-                                background: var(--color-background-hover);
-                                border: 2px solid var(--color-primary);
-                                border-radius: 12px;
-                                padding: 20px;
-                                cursor: pointer;
-                                min-height: 110px;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: space-between;
-                            "
-                        >
+    v-for="levelPath in currentPack.levels"
+    :key="levelPath"
+    @click="openLevel(levelPath)"
+    style="
+        background: var(--color-background-hover);
+        border-radius: 10px;
+        padding: 18px 22px;
+        margin-bottom: 10px;
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        align-items: center;
+        column-gap: 20px;
+        min-height: 78px;
+        cursor: pointer;
+    "
+>
 
-                            <h2 style="
-                                margin: 0 0 16px 0;
-                                line-height: 1.15;
-                            ">
-                                {{ pack.name }}
-                            </h2>
+    <div style="
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 1;
+    ">
+        {{ getRank(levelPath) !== null
+            ? '#' + getRank(levelPath)
+            : '—'
+        }}
+    </div>
 
-                            <p style="
-                                margin: 0;
-                                line-height: 1.4;
-                                opacity: 0.8;
-                            ">
-                                {{ pack.levels.length }} levels
-                            </p>
+    <div style="
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    ">
 
-                        </div>
+        <h2 style="
+            margin: 0;
+            line-height: 1.15;
+        ">
+            {{ getName(levelPath) }}
+        </h2>
 
-                    </div>
+        <p
+            v-if="getPoints(levelPath) !== null"
+            style="
+                margin: 0;
+                line-height: 1.2;
+                opacity: 0.8;
+            "
+        >
+            +{{ getPoints(levelPath) }} points
+        </p>
+
+    </div>
+
+</div>
 
                 </template>
 
