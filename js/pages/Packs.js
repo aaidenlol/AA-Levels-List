@@ -26,9 +26,9 @@ export default {
             {
                 name: 'The Fallen Rulers',
                 levels: [
+                    'uwuchal',
                     'stsbuffed',
                     'poopycologne',
-                    'uwuchal',
                 ],
             },
             {
