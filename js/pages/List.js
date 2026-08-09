@@ -163,11 +163,24 @@ export default {
                     }),
             );
             if (!this.editors) {
-                this.errors.push('Failed to load list editors.');
-            }
-        }
+    this.errors.push('Failed to load list editors.');
+}
 
-        this.loading = false;
+const requestedLevel = this.$route.query.level;
+
+if (requestedLevel) {
+    const levelIndex = this.list.findIndex(
+        ([err, rank, level]) =>
+            level &&
+            level.name.toLowerCase() === requestedLevel.toLowerCase()
+    );
+
+    if (levelIndex !== -1) {
+        this.selected = levelIndex;
+    }
+}
+
+this.loading = false;
     },
     methods: {
         embed,
