@@ -174,6 +174,16 @@ export default {
             this.selectedPack = packIndex;
         },
 
+        packHoverOn(event) {
+            event.currentTarget.style.backgroundColor =
+                'color-mix(in srgb, var(--color-background-hover) 88%, var(--color-primary) 12%)';
+        },
+
+        packHoverOff(event) {
+            event.currentTarget.style.backgroundColor =
+                'var(--color-background-hover)';
+        },
+
         levelHoverOn(event) {
             event.currentTarget.style.background = 'var(--color-primary)';
             event.currentTarget.style.color = 'var(--color-on-primary)';
@@ -215,13 +225,14 @@ export default {
                         );
                         gap: 16px;
                     ">
-
                         <div
                             v-for="(pack, index) in packs"
                             :key="pack.id"
                             @click="openPack(index)"
+                            @mouseenter="packHoverOn"
+                            @mouseleave="packHoverOff"
                             style="
-                                background: var(--color-background-hover);
+                                background-color: var(--color-background-hover);
                                 border: 2px solid var(--color-primary);
                                 border-radius: 12px;
                                 padding: 20px;
@@ -230,9 +241,9 @@ export default {
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: space-between;
+                                transition: background-color 0.15s ease;
                             "
                         >
-
                             <!-- PACK NAME + POINT REWARD -->
                             <div style="
                                 display: flex;
@@ -241,7 +252,6 @@ export default {
                                 gap: 24px;
                                 margin-bottom: 16px;
                             ">
-
                                 <h2 style="
                                     margin: 0;
                                     line-height: 1.15;
@@ -257,7 +267,6 @@ export default {
                                 ">
                                     +{{ formatPackPoints(pack.points) }} points
                                 </p>
-
                             </div>
 
                             <p style="
@@ -267,9 +276,7 @@ export default {
                             ">
                                 {{ pack.levels.length }} levels
                             </p>
-
                         </div>
-
                     </div>
 
                 </template>
@@ -293,7 +300,6 @@ export default {
                         ← Back to Packs
                     </button>
 
-
                     <!-- PACK NAME + POINT REWARD -->
                     <div style="
                         display: flex;
@@ -301,7 +307,6 @@ export default {
                         align-items: flex-start;
                         gap: 32px;
                     ">
-
                         <h1 style="
                             margin: 0 0 8px 0;
                         ">
@@ -317,7 +322,6 @@ export default {
                         ">
                             +{{ formatPackPoints(currentPack.points) }} points
                         </p>
-
                     </div>
 
                     <p style="
@@ -335,6 +339,7 @@ export default {
                     ">
                         {{ currentPack.description }}
                     </p>
+
 
                     <h2 style="
                         margin: 0 0 16px 0;
@@ -366,7 +371,6 @@ export default {
                                 color 0.15s ease;
                         "
                     >
-
                         <!-- RANK -->
                         <div style="
                             font-size: 24px;
@@ -388,7 +392,6 @@ export default {
                             gap: 12px;
                             min-width: 0;
                         ">
-
                             <h2 style="
                                 margin: 0;
                                 line-height: 1.2;
@@ -406,9 +409,7 @@ export default {
                             >
                                 +{{ getPoints(levelPath) }} points
                             </p>
-
                         </div>
-
                     </div>
 
 
@@ -422,7 +423,6 @@ export default {
                     <div
                         v-if="currentPackVictors.length > 0"
                     >
-
                         <div
                             v-for="victor in currentPackVictors"
                             :key="victor.user"
@@ -437,7 +437,6 @@ export default {
                                 column-gap: 24px;
                             "
                         >
-
                             <!-- LEADERBOARD RANK -->
                             <div style="
                                 font-size: 20px;
@@ -446,7 +445,6 @@ export default {
                                 #{{ victor.leaderboardRank }}
                             </div>
 
-
                             <!-- USERNAME -->
                             <div style="
                                 font-size: 20px;
@@ -454,9 +452,7 @@ export default {
                             ">
                                 {{ victor.user }}
                             </div>
-
                         </div>
-
                     </div>
 
                     <p
