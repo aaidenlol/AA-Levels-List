@@ -19,9 +19,17 @@ export default {
         },
     },
 
+    watch: {
+        '$route.query.pack'() {
+            this.selectPackFromRoute();
+        },
+    },
+
     async mounted() {
         const loadedList = await fetchList();
         this.list = loadedList || [];
+
+        this.selectPackFromRoute();
     },
 
     methods: {
@@ -98,6 +106,43 @@ export default {
             });
         },
 
+        openPack(index) {
+            const pack = this.packs[index];
+
+            this.$router.push({
+                path: '/packs',
+                query: {
+                    pack: pack.id,
+                },
+            });
+        },
+
+        backToPacks() {
+            this.$router.push({
+                path: '/packs',
+            });
+        },
+
+        selectPackFromRoute() {
+            const packId = this.$route.query.pack;
+
+            if (!packId) {
+                this.selectedPack = null;
+                return;
+            }
+
+            const packIndex = this.packs.findIndex(
+                (pack) => pack.id === packId
+            );
+
+            if (packIndex === -1) {
+                this.selectedPack = null;
+                return;
+            }
+
+            this.selectedPack = packIndex;
+        },
+
         levelHoverOn(event) {
             event.currentTarget.style.background = 'var(--color-primary)';
             event.currentTarget.style.color = 'var(--color-on-primary)';
@@ -143,7 +188,7 @@ export default {
                         <div
                             v-for="(pack, index) in packs"
                             :key="pack.id"
-                            @click="selectedPack = index"
+                            @click="openPack(index)"
                             style="
                                 background: var(--color-background-hover);
                                 border: 2px solid var(--color-primary);
@@ -181,7 +226,7 @@ export default {
                 <template v-else>
 
                     <button
-                        @click="selectedPack = null"
+                        @click="backToPacks"
                         style="
                             background: var(--color-primary);
                             color: var(--color-on-primary);
