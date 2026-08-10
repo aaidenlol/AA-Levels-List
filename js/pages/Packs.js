@@ -1,4 +1,4 @@
-import { fetchList } from '../content.js';
+import { fetchList, fetchLeaderboard } from '../content.js';
 import { score } from '../score.js';
 import { packs } from '../packs.js';
 
@@ -6,6 +6,7 @@ export default {
     data: () => ({
         selectedPack: null,
         list: [],
+        leaderboard: [],
         packs,
     }),
 
@@ -16,6 +17,23 @@ export default {
             }
 
             return this.packs[this.selectedPack];
+        },
+
+        currentPackVictors() {
+            if (!this.currentPack) {
+                return [];
+            }
+
+            return this.leaderboard
+                .map((player, index) => ({
+                    ...player,
+                    leaderboardRank: index + 1,
+                }))
+                .filter((player) =>
+                    player.completedPacks?.some(
+                        (pack) => pack.id === this.currentPack.id
+                    )
+                );
         },
     },
 
@@ -28,6 +46,13 @@ export default {
     async mounted() {
         const loadedList = await fetchList();
         this.list = loadedList || [];
+
+        const leaderboardResult = await fetchLeaderboard();
+
+        if (leaderboardResult) {
+            const [loadedLeaderboard] = leaderboardResult;
+            this.leaderboard = loadedLeaderboard || [];
+        }
 
         this.selectPackFromRoute();
     },
@@ -385,6 +410,64 @@ export default {
                         </div>
 
                     </div>
+
+
+                    <!-- VICTORS -->
+                    <h2 style="
+                        margin: 36px 0 16px 0;
+                    ">
+                        Victors
+                    </h2>
+
+                    <div
+                        v-if="currentPackVictors.length > 0"
+                    >
+
+                        <div
+                            v-for="victor in currentPackVictors"
+                            :key="victor.user"
+                            style="
+                                background: var(--color-background-hover);
+                                border-radius: 10px;
+                                padding: 18px 24px;
+                                margin-bottom: 12px;
+                                display: grid;
+                                grid-template-columns: 72px minmax(0, 1fr);
+                                align-items: center;
+                                column-gap: 24px;
+                            "
+                        >
+
+                            <!-- LEADERBOARD RANK -->
+                            <div style="
+                                font-size: 20px;
+                                font-weight: bold;
+                            ">
+                                #{{ victor.leaderboardRank }}
+                            </div>
+
+
+                            <!-- USERNAME -->
+                            <div style="
+                                font-size: 20px;
+                                font-weight: bold;
+                            ">
+                                {{ victor.user }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p
+                        v-else
+                        style="
+                            margin: 0;
+                            opacity: 0.7;
+                        "
+                    >
+                        No victors yet.
+                    </p>
 
                 </template>
 
