@@ -38,7 +38,7 @@ export const packs = [
     {
         id: 'spouses-husbands-and-wives',
         name: 'Spouses, Husbands And Wives',
-        description: 'Description here',
+        description: 'This pack is for levels that are officially married. 2 levels being married means the levels have sat right next to eachother on the list for a noteable amount of time. An example of this on another list would be Sonic Wave being married to Sonic Wave Rebirth.',
         points: 60,
         levels: [
             'wavespamdog',
@@ -51,7 +51,7 @@ export const packs = [
     {
         id: 'silly-ahh-levels',
         name: 'Silly Ahh Levels',
-        description: 'Description here',
+        description: 'These levels are all just silly. Nothing else to it really. :3',
         points: 75,
         levels: [
             'sillyrobochal',
@@ -64,7 +64,7 @@ export const packs = [
     {
         id: 'four-og-aa-wave',
         name: 'The Original 4 AA Wave Challenges',
-        description: 'Description here',
+        description: 'These are the original 4 wave challenges that Aida made all within the span of 1 week and remain as the biggest reasons the AALL exists in the first place. definetly 4 of the most infamous AALL levels ever.',
         points: 50,
         levels: [
             'fwt',
