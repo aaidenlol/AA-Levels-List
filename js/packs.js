@@ -39,7 +39,7 @@ export const packs = [
         id: 'spouses-husbands-and-wives',
         name: 'Spouses, Husbands And Wives',
         description: 'Description here',
-        points: 75,
+        points: 60,
         levels: [
             'wavespamdog',
             'mikuspamchal',
@@ -52,7 +52,7 @@ export const packs = [
         id: 'silly-ahh-levels',
         name: 'Silly Ahh Levels',
         description: 'Description here',
-        points: 60,
+        points: 75,
         levels: [
             'sillyrobochal',
             'uwuchal',
