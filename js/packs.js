@@ -56,6 +56,8 @@ export const packs = [
         levels: [
             'sillyrobochal',
             'uwuchal',
+            'fwt',
+            'ucircles',
         ],
     },
 ];
