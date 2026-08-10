@@ -64,7 +64,7 @@ export const packs = [
     {
         id: 'four-og-aa-wave',
         name: 'The Original 4 AA Wave Challenges',
-        description: 'These are the original 4 wave challenges that Aida made all within the span of 1 week and remain as the biggest reasons the AALL exists in the first place. definetly 4 of the most infamous AALL levels ever.',
+        description: 'These are the original 4 wave challenges that Aida made all within the span of 1 week and remain as the biggest reasons the AALL exists in the first place. Definetly 4 of the most infamous AALL levels ever.',
         points: 50,
         levels: [
             'fwt',
