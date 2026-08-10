@@ -9,6 +9,7 @@ export default {
         packs: [
             {
                 name: 'The MTF Trilogy',
+                description: 'Description here',
                 levels: [
                     'mccthree',
                     'tims',
@@ -17,6 +18,7 @@ export default {
             },
             {
                 name: 'The OG Spam Trilogy',
+                description: 'Description here',
                 levels: [
                     'idekwhattsis',
                     'wavespamdog',
@@ -25,6 +27,7 @@ export default {
             },
             {
                 name: 'The Fallen Rulers',
+                description: 'Description here',
                 levels: [
                     'uwuchal',
                     'stsbuffed',
@@ -33,6 +36,7 @@ export default {
             },
             {
                 name: 'Spouses, Husbands And Wives',
+                description: 'Description here',
                 levels: [
                     'wavespamdog',
                     'mikuspamchal',
@@ -42,6 +46,7 @@ export default {
             },
             {
                 name: 'Silly Ahh Levels',
+                description: 'Description here',
                 levels: [
                     'sillyrobochal',
                     'uwuchal',
@@ -243,10 +248,19 @@ export default {
                     </h1>
 
                     <p style="
-                        margin: 0 0 28px 0;
+                        margin: 0 0 16px 0;
                         opacity: 0.8;
                     ">
                         {{ currentPack.levels.length }} levels
+                    </p>
+
+                    <p style="
+                        margin: 0 0 28px 0;
+                        line-height: 1.6;
+                        opacity: 0.9;
+                        max-width: 750px;
+                    ">
+                        {{ currentPack.description }}
                     </p>
 
                     <h2 style="
