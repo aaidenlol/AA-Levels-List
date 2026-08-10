@@ -27,7 +27,7 @@ export const packs = [
         id: 'fallen-rulers',
         name: 'The Fallen Rulers',
         description: 'Description here',
-        points: 75,
+        points: 50,
         levels: [
             'uwuchal',
             'stsbuffed',
@@ -58,6 +58,19 @@ export const packs = [
             'uwuchal',
             'fwt',
             'ucircles',
+        ],
+    },
+    
+    {
+        id: 'four-og-aa-wave',
+        name: 'The Original 4 AA Wave Challenges',
+        description: 'Description here',
+        points: 50,
+        levels: [
+            'fwt',
+            'waveiomastero',
+            'ucircles',
+            'tidalpoop',
         ],
     },
 ];
