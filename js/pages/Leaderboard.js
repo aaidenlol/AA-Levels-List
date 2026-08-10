@@ -207,9 +207,17 @@ export default {
                                 </td>
 
                                 <td class="level">
-                                    <p class="type-label-lg">
+                                    <router-link
+                                        class="type-label-lg"
+                                        :to="{
+                                            path: '/packs',
+                                            query: {
+                                                pack: pack.id
+                                            }
+                                        }"
+                                    >
                                         {{ pack.name }}
-                                    </p>
+                                    </router-link>
                                 </td>
 
                                 <td class="score">
@@ -287,7 +295,6 @@ export default {
         this.leaderboard = leaderboard;
         this.err = err;
 
-        // Hide loading spinner
         this.loading = false;
     },
 
