@@ -2,7 +2,7 @@ export const packs = [
     {
         id: 'mtf-trilogy',
         name: 'The MTF Trilogy',
-        description: 'Currently being the top 3 hardest levels on the AALL, the first letters of each level spell out the phrase MTF, which is relevant due to AAidalol being trans MTF. The levels lined up like this due to pure coincidence and nothing intentional, which makes it even crazier.',
+        description: 'Currently being the top 3 hardest levels on the AALL, the first letters of each level spell out the phrase MTF, which is relevant due to Aida being trans MTF. The levels lined up like this due to pure coincidence and nothing intentional, which makes it even crazier.',
         points: 150,
         levels: [
             'mccthree',
