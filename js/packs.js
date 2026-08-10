@@ -42,9 +42,10 @@ export const packs = [
     {
         id: 'fallen-rulers',
         name: 'The Fallen Rulers',
-        description: 'These levels consist of old iconic top 3s, hence the name, The Fallen Rulers. Even though these levels sit nowhere near the top 3 today, they all remain as some of the most historically important AALL levels to date.',
-        points: 50,
+        description: 'These levels consist of old iconic top 1`s, hence the name, The Fallen Rulers. Even though these levels sit nowhere near the top 1 spot today, they all remain as some of the most historically important AALL levels to date.',
+        points: 75,
         levels: [
+            'enc'
             'uwuchal',
             'stsbuffed',
             'poopycologne',
