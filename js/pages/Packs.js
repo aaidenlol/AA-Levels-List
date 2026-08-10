@@ -91,6 +91,12 @@ export default {
             return Math.round(points * 100) / 100;
         },
 
+        formatPackPoints(points) {
+            return Number(points).toLocaleString(undefined, {
+                maximumFractionDigits: 3,
+            });
+        },
+
         openLevel(path) {
             const entry = this.getLevel(path);
 
@@ -201,12 +207,33 @@ export default {
                                 justify-content: space-between;
                             "
                         >
-                            <h2 style="
-                                margin: 0 0 16px 0;
-                                line-height: 1.15;
+
+                            <!-- PACK NAME + POINT REWARD -->
+                            <div style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: flex-start;
+                                gap: 24px;
+                                margin-bottom: 16px;
                             ">
-                                {{ pack.name }}
-                            </h2>
+
+                                <h2 style="
+                                    margin: 0;
+                                    line-height: 1.15;
+                                ">
+                                    {{ pack.name }}
+                                </h2>
+
+                                <p style="
+                                    margin: 2px 0 0 0;
+                                    font-weight: bold;
+                                    white-space: nowrap;
+                                    color: var(--color-primary);
+                                ">
+                                    +{{ formatPackPoints(pack.points) }} points
+                                </p>
+
+                            </div>
 
                             <p style="
                                 margin: 0;
@@ -215,6 +242,7 @@ export default {
                             ">
                                 {{ pack.levels.length }} levels
                             </p>
+
                         </div>
 
                     </div>
@@ -240,11 +268,32 @@ export default {
                         ← Back to Packs
                     </button>
 
-                    <h1 style="
-                        margin: 0 0 8px 0;
+
+                    <!-- PACK NAME + POINT REWARD -->
+                    <div style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        gap: 32px;
                     ">
-                        {{ currentPack.name }}
-                    </h1>
+
+                        <h1 style="
+                            margin: 0 0 8px 0;
+                        ">
+                            {{ currentPack.name }}
+                        </h1>
+
+                        <p style="
+                            margin: 10px 0 0 0;
+                            font-size: 20px;
+                            font-weight: bold;
+                            white-space: nowrap;
+                            color: var(--color-primary);
+                        ">
+                            +{{ formatPackPoints(currentPack.points) }} points
+                        </p>
+
+                    </div>
 
                     <p style="
                         margin: 0 0 16px 0;
