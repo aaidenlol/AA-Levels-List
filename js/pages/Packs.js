@@ -1,58 +1,12 @@
 import { fetchList } from '../content.js';
 import { score } from '../score.js';
+import { packs } from '../packs.js';
 
 export default {
     data: () => ({
         selectedPack: null,
         list: [],
-
-        packs: [
-            {
-                name: 'The MTF Trilogy',
-                description: 'Description here',
-                levels: [
-                    'mccthree',
-                    'tims',
-                    'fillerahhlevel',
-                ],
-            },
-            {
-                name: 'The OG Spam Trilogy',
-                description: 'Description here',
-                levels: [
-                    'idekwhattsis',
-                    'wavespamdog',
-                    'mikuspamchal',
-                ],
-            },
-            {
-                name: 'The Fallen Rulers',
-                description: 'Description here',
-                levels: [
-                    'uwuchal',
-                    'stsbuffed',
-                    'poopycologne',
-                ],
-            },
-            {
-                name: 'Spouses, Husbands And Wives',
-                description: 'Description here',
-                levels: [
-                    'wavespamdog',
-                    'mikuspamchal',
-                    'lockintwin',
-                    'aacropolis',
-                ],
-            },
-            {
-                name: 'Silly Ahh Levels',
-                description: 'Description here',
-                levels: [
-                    'sillyrobochal',
-                    'uwuchal',
-                ],
-            },
-        ],
+        packs,
     }),
 
     computed: {
@@ -188,7 +142,7 @@ export default {
 
                         <div
                             v-for="(pack, index) in packs"
-                            :key="pack.name"
+                            :key="pack.id"
                             @click="selectedPack = index"
                             style="
                                 background: var(--color-background-hover);
