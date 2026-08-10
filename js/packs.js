@@ -14,7 +14,7 @@ export const packs = [
     {
         id: 'og-spam-trilogy',
         name: 'The OG Spam Trilogy',
-        description: 'Description here',
+        description: 'The first 3 spam challenges on the AALL, at some point lining up at #5, #6, and #7 respectively. Today even though the rankings might say otherwise, these are some of the most impactful levels to the AALL and were some of the levels that inspired the ideas for Packs in the first place.',
         points: 100,
         levels: [
             'idekwhattsis',
@@ -26,7 +26,7 @@ export const packs = [
     {
         id: 'fallen-rulers',
         name: 'The Fallen Rulers',
-        description: 'Description here',
+        description: 'These levels consist of old iconic top 3s, hence the name, The Fallen Rulers. Even though these levels sit nowhere near the top 3 today, they all remain as some of the most historically important AALL levels to date.',
         points: 50,
         levels: [
             'uwuchal',
