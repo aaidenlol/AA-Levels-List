@@ -52,71 +52,82 @@ export default {
 
     computed: {
         currentPack() {
+            if (this.selectedPack === null) {
+                return null;
+            }
+
             return this.packs[this.selectedPack];
         },
     },
 
     async mounted() {
-        this.list = (await fetchList()) || [];
+        const loadedList = await fetchList();
+        this.list = loadedList || [];
     },
 
     methods: {
         getLevel(path) {
-            return this.list.find(
-                ([err, rank, level]) =>
-                    level && level.path === path
-            );
+            return this.list.find((entry) => {
+                const level = entry[2];
+                return level && level.path === path;
+            });
         },
 
         getName(path) {
-            const result = this.getLevel(path);
+            const entry = this.getLevel(path);
 
-            if (!result) {
+            if (!entry) {
                 return path;
             }
 
-            return result[2].name;
+            return entry[2].name;
         },
 
         getRank(path) {
-            const result = this.getLevel(path);
+            const entry = this.getLevel(path);
 
-            if (!result) {
+            if (!entry) {
                 return null;
             }
 
-            return result[1];
+            return entry[1];
         },
 
         getPoints(path) {
-            const result = this.getLevel(path);
+            const entry = this.getLevel(path);
 
-            if (!result || result[1] === null) {
+            if (!entry) {
                 return null;
             }
 
-            const rank = result[1];
-            const level = result[2];
+            const rank = entry[1];
+            const level = entry[2];
 
-            const rankedLevels = this.list.filter(
-                ([err, rank, level]) =>
-                    level && rank !== null
-            ).length;
+            if (rank === null) {
+                return null;
+            }
+
+            const rankedLevelCount = this.list.filter((item) => {
+                const itemRank = item[1];
+                const itemLevel = item[2];
+
+                return itemLevel && itemRank !== null;
+            }).length;
 
             const points = score(
                 rank,
                 100,
                 level.percentToQualify,
-                rankedLevels
+                rankedLevelCount
             );
 
             return Math.round(points * 100) / 100;
         },
 
         openLevel(path) {
-            const result = this.getLevel(path);
+            const entry = this.getLevel(path);
 
-            if (!result) {
+            if (!entry) {
                 return;
             }
 
@@ -127,25 +138,46 @@ export default {
                 },
             });
         },
+
+        levelHoverOn(event) {
+            event.currentTarget.style.background = 'var(--color-primary)';
+            event.currentTarget.style.color = 'var(--color-on-primary)';
+        },
+
+        levelHoverOff(event) {
+            event.currentTarget.style.background =
+                'var(--color-background-hover)';
+
+            event.currentTarget.style.color = '';
+        },
     },
 
     template: `
-        <main style="display: block; overflow-y: auto;">
+        <main style="
+            display: block;
+            overflow-y: auto;
+        ">
             <div style="
                 max-width: 900px;
                 margin: 0 auto;
                 padding: 32px;
             ">
 
+                <!-- PACK LIST -->
                 <template v-if="selectedPack === null">
 
-                    <h1 style="margin-bottom: 24px;">
+                    <h1 style="
+                        margin-bottom: 24px;
+                    ">
                         Packs
                     </h1>
 
                     <div style="
                         display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        grid-template-columns: repeat(
+                            auto-fit,
+                            minmax(250px, 1fr)
+                        );
                         gap: 16px;
                     ">
 
@@ -165,7 +197,6 @@ export default {
                                 justify-content: space-between;
                             "
                         >
-
                             <h2 style="
                                 margin: 0 0 16px 0;
                                 line-height: 1.15;
@@ -180,7 +211,6 @@ export default {
                             ">
                                 {{ pack.levels.length }} levels
                             </p>
-
                         </div>
 
                     </div>
@@ -188,6 +218,7 @@ export default {
                 </template>
 
 
+                <!-- SELECTED PACK -->
                 <template v-else>
 
                     <button
@@ -225,10 +256,13 @@ export default {
                     </h2>
 
 
+                    <!-- LEVEL ROWS -->
                     <div
                         v-for="levelPath in currentPack.levels"
                         :key="levelPath"
                         @click="openLevel(levelPath)"
+                        @mouseenter="levelHoverOn"
+                        @mouseleave="levelHoverOff"
                         style="
                             background: var(--color-background-hover);
                             border-radius: 10px;
@@ -240,21 +274,27 @@ export default {
                             column-gap: 24px;
                             min-height: 94px;
                             cursor: pointer;
+                            transition:
+                                background-color 0.15s ease,
+                                color 0.15s ease;
                         "
                     >
 
+                        <!-- RANK -->
                         <div style="
                             font-size: 24px;
                             font-weight: bold;
                             line-height: 1.2;
                         ">
-                            {{ getRank(levelPath) !== null
-                                ? '#' + getRank(levelPath)
-                                : '—'
+                            {{
+                                getRank(levelPath) !== null
+                                    ? '#' + getRank(levelPath)
+                                    : '—'
                             }}
                         </div>
 
 
+                        <!-- LEVEL INFO -->
                         <div style="
                             display: flex;
                             flex-direction: column;
