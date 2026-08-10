@@ -45,7 +45,7 @@ export const packs = [
         description: 'These levels consist of old iconic top 1`s, hence the name, The Fallen Rulers. Even though these levels sit nowhere near the top 1 spot today, they all remain as some of the most historically important AALL levels to date.',
         points: 75,
         levels: [
-            'enc'
+            'enc',
             'uwuchal',
             'stsbuffed',
             'poopycologne',
