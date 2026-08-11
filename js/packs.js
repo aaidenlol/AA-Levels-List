@@ -35,6 +35,7 @@ export const packs = [
             'stsbuffed',
             'fallingoftears',
             'coolccdcdcdsbcb',
+            'theyeechee',
             'stsog',
         ],
     },
