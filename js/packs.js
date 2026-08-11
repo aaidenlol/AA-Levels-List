@@ -97,6 +97,7 @@ export const packs = [
         description: 'Levels in which the entire gimmick is simply just consistency.',
         points: 75,
         levels: [
+            'illverifythatlate',
             'aidaissosmart',
             'totalballsvfour',
             'sfii',
