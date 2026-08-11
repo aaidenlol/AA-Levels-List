@@ -41,6 +41,22 @@ export const packs = [
     },
 
     {
+        id: 'aida-bottom-picks',
+        name: 'Aida`s Bottom Picks',
+        description: 'These levels are a compilation of Aida`s least favorite levels currently on the AALL, that she does NOT find fun and does NOT recommend to others.',
+        points: 100,
+        levels: [
+            'mccthree',
+            'phobosstartpos',
+            'idekwhattsis',
+            'thefoundexistence',
+            'thesomethingvariant',
+            'sfii',
+            'zerotimetofade',
+        ],
+    },
+
+    {
         id: 'fallen-rulers',
         name: 'The Fallen Rulers',
         description: 'These levels consist of old iconic top 1`s, hence the name, The Fallen Rulers. Even though these levels sit nowhere near the top 1 spot today, they all remain as some of the most historically important AALL levels to date.',
