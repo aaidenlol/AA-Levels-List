@@ -95,7 +95,7 @@ export const packs = [
         id: 'consistency-is-key',
         name: 'Consistency Is Key',
         description: 'Levels in which the entire gimmick is simply just consistency.',
-        points: 75,
+        points: 100,
         levels: [
             'illverifythatlate',
             'aidaissosmart',
