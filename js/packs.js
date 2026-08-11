@@ -44,7 +44,7 @@ export const packs = [
         id: 'aida-bottom-picks',
         name: 'Aida`s Bottom Picks',
         description: 'These levels are a compilation of Aida`s least favorite levels currently on the AALL, that she does NOT find fun and does NOT recommend to others.',
-        points: 100,
+        points: 150,
         levels: [
             'mccthree',
             'phobosstartpos',
