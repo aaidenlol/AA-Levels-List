@@ -1,29 +1,5 @@
 export const packs = [
     {
-        id: 'mtf-trilogy',
-        name: 'The MTF Trilogy',
-        description: 'Currently being the top 3 hardest levels on the AALL, the first letters of each level spell out the phrase MTF, which is relevant due to Aida being trans MTF. The levels lined up like this due to pure coincidence and nothing intentional, which makes it even crazier.',
-        points: 150,
-        levels: [
-            'mccthree',
-            'tims',
-            'fillerahhlevel',
-        ],
-    },
-
-    {
-        id: 'og-spam-trilogy',
-        name: 'The OG Spam Trilogy',
-        description: 'The first 3 spam challenges on the AALL, at some point lining up at #5, #6, and #7 respectively. Today even though the rankings might say otherwise, these are some of the most impactful levels to the AALL and were some of the levels that inspired the ideas for Packs in the first place.',
-        points: 100,
-        levels: [
-            'idekwhattsis',
-            'wavespamdog',
-            'mikuspamchal',
-        ],
-    },
-
-    {
         id: 'aida-top-picks',
         name: 'Aida`s Top Picks',
         description: 'These levels are a compilation of Aida`s favorite levels currently on the AALL, that she finds fun and recommends to others.',
@@ -53,6 +29,30 @@ export const packs = [
             'thesomethingvariant',
             'sfii',
             'zerotimetofade',
+        ],
+    },
+    
+    {
+        id: 'mtf-trilogy',
+        name: 'The MTF Trilogy',
+        description: 'Currently being the top 3 hardest levels on the AALL, the first letters of each level spell out the phrase MTF, which is relevant due to Aida being trans MTF. The levels lined up like this due to pure coincidence and nothing intentional, which makes it even crazier.',
+        points: 150,
+        levels: [
+            'mccthree',
+            'tims',
+            'fillerahhlevel',
+        ],
+    },
+
+    {
+        id: 'og-spam-trilogy',
+        name: 'The OG Spam Trilogy',
+        description: 'The first 3 spam challenges on the AALL, at some point lining up at #5, #6, and #7 respectively. Today even though the rankings might say otherwise, these are some of the most impactful levels to the AALL and were some of the levels that inspired the ideas for Packs in the first place.',
+        points: 100,
+        levels: [
+            'idekwhattsis',
+            'wavespamdog',
+            'mikuspamchal',
         ],
     },
 
