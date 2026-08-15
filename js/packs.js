@@ -55,6 +55,18 @@ export const packs = [
             'mikuspamchal',
         ],
     },
+    
+    {
+        id: 'confusion-trilogy',
+        name: 'The Confusion Trilogy',
+        description: 'All of these levels are made for various people to either maybe or might clear. Hence the name. They were all also right next to eachother on the list at some point.',
+        points: 75,
+        levels: [
+            'bigzacianmaybeclear',
+            'fleamaybeclear',
+            'kahtanahmightclear',
+        ],
+    },
 
     {
         id: 'fallen-rulers',
