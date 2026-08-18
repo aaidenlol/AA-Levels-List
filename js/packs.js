@@ -55,6 +55,18 @@ export const packs = [
             'mikuspamchal',
         ],
     },
+
+    {
+        id: 'post-imtp-top-ones',
+        name: 'The Post IMTP Era Top Ones',
+        description: 'These levels are the first 3 top ones after the I Murdered Tidal Poop Era, about 2 days to 2 months after the AALL got recoded and Aida decided all repetitive levels will not be considered list worthy anymore, dethroning IMTPs 5 month false reign as top one.',
+        points: 100,
+        levels: [
+            'mccthree',
+            'tims',
+            'straitmemorybs',
+        ],
+    },
     
     {
         id: 'confusion-trilogy',
