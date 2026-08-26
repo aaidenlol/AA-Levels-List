@@ -8,6 +8,6 @@
     "verification": "https://youtu.be/4AFeEwwP3EI",
     "showcase": "https://youtu.be/4AFeEwwP3EI",    
     "percentToQualify": "90",
-    "records": [], 
+    "records": [ { "user": "Mankey", "link": "https://www.youtube.com/watch?v=AzyE1eEcmq4", "percent": 100 } ], 
     "tags": ["Chokepoints", "Precision", "Wave", "Timings", "Fast Paced"]
 }
