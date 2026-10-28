@@ -17,6 +17,7 @@ const roleIconMap = {
 
 export default {
     components: { Spinner, LevelAuthors },
+
     template: `
         <main v-if="loading">
             <Spinner></Spinner>
@@ -31,12 +32,14 @@ export default {
                     <tr v-for="([err, rank, level], i) in list">
 
                         <td class="rank">
+
                             <p
                                 v-if="rank === null"
                                 class="type-label-lg"
                             >
                                 &mdash;
                             </p>
+
                             <p
                                 v-else
                                 class="type-label-lg"
@@ -50,6 +53,7 @@ export default {
                             </p>
 
                         </td>
+
                         <td
                             class="level"
                             :class="{
@@ -59,8 +63,9 @@ export default {
                         >
 
                             <button @click="selected = i">
+
                                 <span class="type-label-lg">
-                                    {{ level?.name || `Error (${err}.json)` }}
+                                    {{ level?.name || \`Error (\${err}.json)\` }}
                                 </span>
 
                             </button>
@@ -79,6 +84,7 @@ export default {
                 <div class="level" v-if="level">
 
                     <h1>{{ level.name }}</h1>
+
                     <LevelAuthors
                         :author="level.author"
                         :creators="level.creators"
@@ -91,6 +97,7 @@ export default {
                     >
                         {{ level.description }}
                     </p>
+
                     <div style="
                         display:flex;
                         gap:0.5rem;
@@ -104,10 +111,12 @@ export default {
                         </div>
                     </div>
 
+
                     <div
                         v-if="level.showcase"
                         class="tabs"
                     >
+
                         <button
                             class="tab type-label-lg"
                             :class="{
@@ -119,6 +128,7 @@ export default {
                                 Verification
                             </span>
                         </button>
+
                         <button
                             class="tab"
                             :class="{
@@ -127,11 +137,12 @@ export default {
                             @click="toggledShowcase = true"
                         >
                             <span class="type-label-lg">
-                                Frame Windows
+                                Showcase
                             </span>
                         </button>
 
                     </div>
+
 
                     <iframe
                         class="video"
@@ -147,6 +158,7 @@ export default {
                             <div class="type-title-sm">
                                 Points when completed
                             </div>
+
                             <p>
                                 {{
                                     score(
@@ -160,6 +172,7 @@ export default {
                                 }}
                             </p>
                         </li>
+
                         <li>
                             <div class="type-title-sm">
                                 ID
@@ -172,6 +185,7 @@ export default {
                             <div class="type-title-sm">
                                 Password
                             </div>
+
                             <p>
                                 {{ level.password || 'Free to copy' }}
                             </p>
@@ -190,7 +204,9 @@ export default {
                             <div class="type-title-sm">
                                 Song
                             </div>
+
                             <br>
+
                             <p>
                                 <a
                                     :href="(level.song===undefined)
@@ -206,6 +222,7 @@ export default {
                                     Link to song
                                 </a>
                             </p>
+
                         </li>
 
                     </ul>
@@ -223,6 +240,7 @@ export default {
                         </strong>
                         or better to qualify
                     </p>
+
                     <p v-else-if="level.rank <= 200">
                         <strong>100%</strong>
                         or better to qualify
@@ -235,6 +253,7 @@ export default {
 
 
                     <table class="records">
+
                         <tr
                             v-for="record in level.records"
                             class="record"
@@ -247,6 +266,7 @@ export default {
                             </td>
 
                             <td class="user">
+
                                 <a
                                     :href="record.link"
                                     target="_blank"
@@ -258,9 +278,10 @@ export default {
                             </td>
 
                             <td class="mobile">
+
                                 <img
                                     v-if="record.mobile"
-                                    :src="`/assets/phone-landscape${store.dark ? '-dark' : ''}.svg`"
+                                    :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`"
                                     alt="Mobile"
                                 >
 
@@ -271,6 +292,7 @@ export default {
                     </table>
 
                 </div>
+
 
                 <div
                     v-else
@@ -290,6 +312,7 @@ export default {
             <div class="meta-container">
 
                 <div class="meta">
+
                     <div
                         class="errors"
                         v-show="errors.length > 0"
@@ -306,14 +329,16 @@ export default {
                     <template v-if="editors">
 
                         <h3>List Editors</h3>
+
                         <ol class="editors">
 
                             <li v-for="editor in editors">
 
                                 <img
-                                    :src="`/assets/${roleIconMap[editor.role]}${store.dark ? '-dark' : ''}.svg`"
+                                    :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`"
                                     :alt="editor.role"
                                 >
+
                                 <a
                                     v-if="editor.link"
                                     class="type-label-lg link"
@@ -322,6 +347,7 @@ export default {
                                 >
                                     {{ editor.name }}
                                 </a>
+
                                 <p v-else>
                                     {{ editor.name }}
                                 </p>
@@ -343,6 +369,7 @@ export default {
 
         </main>
     `,
+
     data: () => ({
         list: [],
         editors: [],
@@ -363,6 +390,7 @@ export default {
                 this.list[this.selected][2]
             );
         },
+
         video() {
             if (!this.level.showcase) {
                 return embed(this.level.verification);
@@ -385,6 +413,7 @@ export default {
         // Error handling
 
         if (!this.list) {
+
             this.errors = [
                 'Failed to load list. Retry in a few minutes or notify list staff.',
             ];
@@ -398,6 +427,7 @@ export default {
                         return `Failed to load level. (${err}.json)`;
                     }),
             );
+
             if (!this.editors) {
                 this.errors.push(
                     'Failed to load list editors.'
@@ -411,6 +441,7 @@ export default {
                 this.$route.query.level;
 
             if (requestedLevel) {
+
                 const levelIndex =
                     this.list.findIndex(
                         ([err, rank, level]) =>
