@@ -137,7 +137,7 @@ export default {
                             @click="toggledShowcase = true"
                         >
                             <span class="type-label-lg">
-                                Showcase
+                                Frame Windows
                             </span>
                         </button>
 
